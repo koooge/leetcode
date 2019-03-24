@@ -10,7 +10,7 @@ const addTwoNumbers = (l1, l2) => {
 
   let carry = 0;
   for (let prev = head, node1 = l1, node2 = l2;
-    node1 !== null || node2 !== null;
+    node1 !== null || node2 !== null || carry !== 0;
     node1 = node1 ? node1.next : null, node2 = node2 ? node2.next : null) {
 
     const val1 = node1 ? node1.val : 0;
