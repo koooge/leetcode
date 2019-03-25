@@ -1,16 +1,15 @@
 const convert = (s, numRows) => {
-  let ans = '';
-  
-  for (let i = 0; i < numRows - 1; ++i) {
-    for (let k = i; k < s.length; k += (numRows - 1 - i) * 2) {
-      ans += s[k];
-    }
-  }
-  for (let k = numRows - 1; k < s.length; k += (numRows - 1) * 2) {
-    ans += s[k];
+  if (numRows === 1) return s;
+
+  let arr = [];
+
+  for (let i = 0; i < s.length; ++i) {
+    let k = i % ((numRows - 1) * 2);
+    let n = (numRows - 1) >= k ?  k : (numRows - 1) - (k - (numRows - 1));
+    arr[n] = [arr[n], s[i]].join('');
   }
 
-  return ans;
+  return arr.join('');
 };
 
 console.log(convert('PAYPALISHIRING', 3)); // 'PAHNAPLSIIGYIR'
