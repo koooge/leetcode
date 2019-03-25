@@ -50,7 +50,7 @@ const romanToInt = (s) => {
 				++i;
 				break;
 			default:
-				ans += 1000;
+				ans += 100;
 				break;
 			}
 			break;
