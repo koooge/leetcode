@@ -3,7 +3,7 @@ const INT_MAX = Math.pow(2, 31) - 1;
 
 const myAtoi = (str) => {
   const s = str.replace(/^\s+/, '').split(' ')[0];
-  const firstNumber = Number(s.match(/^[0-9+-][0-9]+/));
+  const firstNumber = Number(s.match(/^[0-9+-][0-9]*/));
 
   if (Number.isNaN(firstNumber)) {
     return 0;
