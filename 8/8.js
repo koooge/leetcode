@@ -16,6 +16,10 @@ const myAtoi = (str) => {
   return firstNumber;
 };
 
+// const myAtoi = (str) => {
+//   return Math.max(Math.min(parseInt(str) || 0, 2147483647), -2147483648)
+// };
+
 console.log(myAtoi('42')); // 42
 console.log(myAtoi('   -42')); // -42
 console.log(myAtoi('4193 with words')); // 4193
