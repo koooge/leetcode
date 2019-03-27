@@ -1,12 +1,14 @@
 const maxSubArray = (nums) => {
-  let max;
+  let max = Number.MIN_SAFE_INTEGER;
+  let value = 0;
   
-  for (let i = 1; i <= nums.length; ++i) {
-    for (let j = 0; j < nums.length - (i-1); ++j) {
-      const subArray = nums.slice(j, j+i);
-      const subSum = subArray.reduce((prev, curr) => prev + curr);
-      if (max === undefined || subSum > max) max = subSum;
+  for (let i = 0; i < nums.length; ++i) {
+    if (value > 0) {
+      value += nums[i];
+    } else {
+      value = nums[i];
     }
+    if (value > max) max = value;
   }
 
   return max;
