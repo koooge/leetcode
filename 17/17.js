@@ -1,28 +1,26 @@
 const letterCombinations = (digits) => {
-  const buttons = [
-    null, null,
-    ['a', 'b', 'c'],
-    ['d', 'e', 'f'],
-    ['g', 'h', 'i'],
-    ['j', 'k', 'l'],
-    ['m', 'n', 'o'],
-    ['p', 'q', 'r', 's'],
-    ['t', 'u', 'v'],
-    ['w', 'x', 'y', 'z']
-  ];
-  let combinations = [];
+  const buttons = {
+    "2": ['a', 'b', 'c'],
+    "3": ['d', 'e', 'f'],
+    "4": ['g', 'h', 'i'],
+    "5": ['j', 'k', 'l'],
+    "6": ['m', 'n', 'o'],
+    "7": ['p', 'q', 'r', 's'],
+    "8": ['t', 'u', 'v'],
+    "9": ['w', 'x', 'y', 'z'],
+  };
 
-  for (let i = 0; i < digits.length; ++i) {
-    const digit = digits[i];
-    const button = buttons[Number(digits[i])];
-    for (let j = 0; j < button.length; ++j) {
-      const letter = button[j];
-      for (let k = 0; k < Math.pow(3, digits.length - 1); k++) { /* how many a */
-        const index = i !== 0 ? (i * 3 * k) + j : j * Math.pow(3, digits.length - 1) + k;
-        combinations[index] = combinations[index] !== undefined ? combinations[index] + letter : letter;
-      }
-    }
-  }
+  let combinations = buttons[digits[0]] || [];
+  digits = digits.slice(1);
+
+  digits.split('').forEach(digit => {
+    const button = buttons[digit];
+    let t = [];
+    buttons[digit].forEach(letter => {
+      t = t.concat(combinations.map(item => item + letter));
+    });
+    combinations = t;
+  });
 
   return combinations;
 };
@@ -32,3 +30,4 @@ console.log(letterCombinations('2')); // ['a', 'b', 'c']
 console.log(letterCombinations('6')); // ['m', 'n', 'o']
 console.log(letterCombinations('8')); // ['t', 'u', 'v']
 console.log(letterCombinations('234')); // ["adg","adh","adi","aeg","aeh","aei","afg","afh","afi","bdg","bdh","bdi","beg","beh","bei","bfg","bfh","bfi","cdg","cdh","cdi","ceg","ceh","cei","cfg","cfh","cfi"]
+console.log(letterCombinations('')); // []
