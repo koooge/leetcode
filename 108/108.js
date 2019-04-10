@@ -1,38 +1,28 @@
 class TreeNode {
-	constructor(val, left, right) {
-		this.val = val;
-		this.left = left;
-		this.right = right;
-	}
+  constructor(val, left, right) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
 }
 
-const heapify = (root, nums) => {
-	const val = nums.shift();
-	const node = new TreeNode(val, null, null);
+const helper = (nums, low, high) => {
+  if (low > high) return null;
 
-	if (val > root.val) {
-		node.left = root;
-		node.right = root.right;
-	} else {
-		node.right = root;
-		node.left = root.left;
-	}
-	root = node;
+  let mid = Math.floor((low + high) / 2);
+  let node = new TreeNode(nums[mid], null, null);
+  node.left = helper(nums, low, mid - 1);
+  node.right = helper(nums, mid + 1, high);
 
-	// sort
-
-	heapify(root, nums);
+  return node;
 };
 
 const sortedArrayToBST = nums => {
-	if (nums.length === 0) return null;
+  if (nums.length === 0) return null;
 
-	rootIndex = Math.floor(nums.length/2);
-	let root = new TreeNode(nums[rootIndex]);
-	nums.splice(rootIndex, 1);
-	heapify(root, nums);
+  let root = helper(nums, 0, nums.length - 1);
 
-	return root;
+  return root;
 };
 
 console.log(sortedArrayToBST([-10, -3, 0, 5, 9]));
