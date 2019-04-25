@@ -1,10 +1,15 @@
 class NumArray {
 	constructor(nums) {
-		this.nums = nums;
+		this.sums = [];
+		let sum = 0;
+		for (let i = 0; i < nums.length; ++i) {
+			sum += nums[i];
+			this.sums[i] = sum;
+		}
 	}
 
 	sumRange(i, j) {
-		return this.nums.slice(i, j + 1).reduce((a, b) => a + b);
+		return this.sums[j] - (i > 0 ? this.sums[i - 1] : 0);
 	}
 }
 
