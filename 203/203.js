@@ -7,20 +7,21 @@ class ListNode {
 
 const removeElements = (head, val) => {
   if (!head) return null;
+  if (head.val === val) return head.next;
   if (!head.next) return head;
 
-  if (head.val === val) {
-    head = head.next;
-  } else if (head.next.val === val) {
-    head.next = head.next.next;
-  }
+  if (head.next.val === val) head.next = head.next.next;
   removeElements(head.next, val);
 
   return head;
 };
 
 const a = new ListNode(1, new ListNode(2, new ListNode(6, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6)))))));
-console.log(removeElements(a, 6)); // 1 -> 2 -> 3 -> 4 -> 5
+console.log(removeElements(a, 6)); // [1 -> 2 -> 3 -> 4 -> 5]
 
 const b = new ListNode(1, new ListNode(2));
-console.log(removeElements(b, 1)); // 2
+console.log(removeElements(b, 1)); // [2]
+const c = new ListNode(1);
+console.log(removeElements(c, 1)); // []
+const d = new ListNode(1, new ListNode(1));
+console.log(removeElements(d, 1)); // []
