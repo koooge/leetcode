@@ -1,9 +1,15 @@
 const solution = isBadVersion => {
   return function(n) {
-    for (let i = n - 1; i > 0; --i) {
-      if (!isBadVersion(i)) return i+1;
+    let start = 1, end = n;
+    while(start < end) {
+      const mid = Math.floor(start + (end - start) / 2);
+      if (isBadVersion(mid)) {
+        end = mid;
+      } else {
+        start = mid + 1
+      }
     }
-    return 1;
+    return start;
   }
 };
 
