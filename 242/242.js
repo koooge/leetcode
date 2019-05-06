@@ -1,13 +1,13 @@
 const isAnagram = (s, t) => {
-	const ts = s.split('');
+	const ts = t.split('');
 
 	for (let i = 0; i < s.length; ++i) {
-		const index = t.indexOf(s[i]);
+		const index = ts.indexOf(s[i]);
 		if (index === -1) return false;
-		ts.splice(index);
+		ts.splice(index, 1);
 	};
 
-	return true;
+	return ts.length === 0;
 };
 
 console.log(isAnagram('anagram', 'nagaram')); // true
