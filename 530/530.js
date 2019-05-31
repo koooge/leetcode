@@ -7,46 +7,31 @@ class TreeNode {
 }
 
 const getMinimumDifference = root => {
+	let values = [root.val];
+
+	if (root.left) getVals(root.left, values);
+	if (root.right) getVals(root.right, values);
+
+	values.sort((a, b) => {
+		if (a > b) return 1;
+		if (a < b) return -1;
+		return 0;
+	});
+
 	let min = Number.MAX_SAFE_INTEGER;
-	if (root.left) min = solve(root.left, [root.val], min)
-	if (root.right) {
-		const minRight = solve(root.right, [root.val], min);
-		if (minRight < min) min = minRight;
-	}
-	return min;
-};
-
-const solve = (ptr, path, min) => {
-	path.push(ptr.val);
-
-	const diff = minDiff(path);
-	if (diff < min) min = diff;
-
-
-	if (ptr.left) {
-		minLeft = solve(ptr.left, path, min);
-		if (minLeft < min) min = minLeft;
-	}
-	if (ptr.right) {
-		const minRight = solve(ptr.right, path, min);
-		if (minRight < min) min = minRight;
+	for (let i = 0; i < values.length - 1; ++i) {
+		const diff = values[i + 1] - values[i];
+		min = Math.min(min, diff);
 	}
 
 	return min;
 };
 
-const minDiff = array => {
-	let min = Math.abs(array[0] - array[1]);
+const getVals = (ptr, values) => {
+	values.push(ptr.val);
 
-	for (let i = 0; i < array.length; ++i) {
-		for (let j = 0; j < array.length; ++j) {
-			if (i === j) continue;
-			let diff = Math.abs(array[i] - array[j]);
-			if (diff < min) min = diff;
-		}
-	}
-
-	return min;
+	if (ptr.left) getVals(ptr.left, values);
+	if (ptr.right) getVals(ptr.right, values);
 };
 
 const a = new TreeNode(1, null, new TreeNode(3, new TreeNode(2)));
