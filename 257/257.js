@@ -11,21 +11,21 @@ const binaryTreePaths = root => {
 
 	let paths = [];
 
-	solve(root, [], paths);
+	solve(root, '', paths);
 
 	return paths;
 };
 
 const solve = (ptr, path, paths) => {
-	path.push(ptr.val);
+	path += String(ptr.val);
 
 	if (!ptr.left && !ptr.right) {
-		paths.push(path.join('->'));
+		paths.push(path);
 		return;
 	}
 
-	if (ptr.left) solve(ptr.left, path.slice(), paths);
-	if (ptr.right) solve(ptr.right, path.slice(), paths);
+	if (ptr.left) solve(ptr.left, `${path}->`, paths);
+	if (ptr.right) solve(ptr.right, `${path}->`, paths);
 };
 
 const a = new TreeNode(1, new TreeNode(2, null, new TreeNode(5)), new TreeNode(3));
