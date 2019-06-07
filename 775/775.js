@@ -1,5 +1,5 @@
 const isIdealPermutation = A => {
-	for (let i = 0; i < A.length - 1; ++i) {
+	for (let i = 0; i < A.length - 2; ++i) {
 		for (let j = i + 2; j < A.length; ++j) {
 			if (A[i] > A[j]) return false;
 		}
