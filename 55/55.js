@@ -1,13 +1,9 @@
-const canJump = (nums, pos = 0) => {
-	const n = Math.min(nums[pos], nums.length - 1);
-	if (pos === nums.length - 1) return true;
-	if (n === 0) return false;
-
-	for (let i = n; i >= 1; --i) {
-		if (canJump(nums, pos + i)) return true;
+const canJump = (nums) => {
+	let last = nums.length - 1;
+	for (i = last - 1; i >= 0; --i) {
+		if (i + nums[i] >= last) last = i;
 	}
-
-	return false;
+	return last <= 0;
 };
 
 console.log(canJump([2, 3, 1, 1, 4])); // true
