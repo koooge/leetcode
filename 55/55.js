@@ -1,14 +1,12 @@
 const canJump = (nums, pos = 0) => {
-	const n = nums[pos];
+	const n = Math.min(nums[pos], nums.length - 1);
 	if (pos === nums.length - 1) return true;
 	if (n === 0) return false;
 
 	for (let i = n; i >= 1; --i) {
-		let jump = pos + i;
-		if (jump === nums.length - 1) return true;
-		if (jump > nums.length - 1) continue;
-		if (jump < nums.length - 1 && canJump(nums, jump)) return true;
+		if (canJump(nums, pos + i)) return true;
 	}
+
 	return false;
 };
 
