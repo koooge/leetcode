@@ -1,19 +1,19 @@
 const lastRemaining = (n) => {
   let toRight = true;
-  let list = [...Array(n)].map((_, i) => i + 1);
+  let remaining = n;
+  let step = 1;
+  let head = 1;
 
-  while (list.length !== 1) {
-    let next = [];
-    if (toRight) {
-      for (let i = 1; i < list.length; i += 2) next.push(list[i]);
-    } else {
-      for (let i = list.length - 2; i >= 0; i -= 2) next.unshift(list[i]);
-    }
+  while (remaining > 1) {
+    if (toRight || remaining % 2 === 1) head += step;
+    step *= 2;
+    remaining = Math.floor(remaining / 2);
     toRight = !toRight;
-    list = next;
   }
 
-  return list[0];
+  return head;
 };
 
 console.log(lastRemaining(9)); // 6
+console.log(lastRemaining(1)); // 1
+console.log(lastRemaining(5)); // 2
