@@ -1,6 +1,5 @@
 const distributeCandies = candies => {
-	const kinds = new Set(candies).size;
-	return kinds > (candies.length / 2) ? candies.length / 2 : kinds;
+	return Math.min(new Set(candies).size, candies.length / 2);
 };
 
 console.log(distributeCandies([1, 1, 2, 2, 3, 3])); // 3
