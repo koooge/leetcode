@@ -1,8 +1,16 @@
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
-        for (int i = 0; i <= n; ++i) {
-            if (guess(i) == 0) return i;
+        int i = 1, j = n;
+        while (i < j) {
+            int mid = i + (j - i) / 2;
+            if (guess(mid) == 0) {
+                return mid;
+            } else if (guess(mid) > 0) {
+                i = mid + 1;
+            } else {
+                j = mid;
+            }
         }
-        return n;
+        return i;
     }
 }
