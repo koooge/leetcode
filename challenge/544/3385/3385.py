@@ -14,7 +14,7 @@ class Solution:
         self.toArray(root, 0, 0)
         for i in range(self.maxDepth + 1):
             d = self.map[str(i)]
-            width = (len(d) - 1 - d[::-1].index(1)) - d.index(1) + 1
+            width = max(d) - min(d) + 1
             self.maxWidth = width if width > self.maxWidth else self.maxWidth
         return self.maxWidth
 
@@ -23,13 +23,12 @@ class Solution:
             return
 
         if str(depth) not in self.map:
-            self.map[str(depth)] = [None] * pow(2, depth)
-        self.map[str(depth)][pos - pow(2, depth) + 1] = 1
+            self.map[str(depth)] = []
+        self.map[str(depth)].append(pos - pow(2, depth) + 1)
         self.maxDepth = depth if depth > self.maxDepth else self.maxDepth
 
         self.toArray(root.left, depth + 1, pos * 2 + 1)
         self.toArray(root.right, depth + 1, pos * 2 + 2)
-
 
 s1 = Solution()
 print(s1.widthOfBinaryTree(TreeNode(1, TreeNode(3, TreeNode(5), TreeNode(3)), TreeNode(2, None, TreeNode(9))))) # 4
