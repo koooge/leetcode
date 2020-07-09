@@ -5,13 +5,14 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    maxDepth = 0
-    maxWidth = 0
-    arr = [None] * 128
+    def __init__(self):
+        self.maxDepth = 0
+        self.maxWidth = 0
+        self.arr = [None] * pow(2, 16)
 
     def widthOfBinaryTree(self, root: TreeNode) -> int:
         self.toArray(root, 0, 0)
-        for i in range(1, self.maxDepth + 1):
+        for i in range(self.maxDepth + 1):
             d = self.arr[pow(2, i) - 1:pow(2, i + 1) - 1]
             width = (len(d) - 1 - d[::-1].index(1)) - d.index(1) + 1
             self.maxWidth = width if width > self.maxWidth else self.maxWidth
@@ -36,3 +37,5 @@ s3 = Solution()
 print(s3.widthOfBinaryTree(TreeNode(1, TreeNode(3, TreeNode(5)), TreeNode(2)))) # 2
 s4 = Solution()
 print(s4.widthOfBinaryTree(TreeNode(1, TreeNode(3, TreeNode(5, TreeNode(6))), TreeNode(2, None, TreeNode(9, None, TreeNode(7)))))) # 8
+s5 = Solution()
+print(s5.widthOfBinaryTree(TreeNode(1))) # 1
