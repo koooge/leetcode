@@ -8,12 +8,12 @@ class Solution:
     def __init__(self):
         self.maxDepth = 0
         self.maxWidth = 0
-        self.arr = [None] * pow(2, 16)
+        self.map = {}
 
     def widthOfBinaryTree(self, root: TreeNode) -> int:
         self.toArray(root, 0, 0)
         for i in range(self.maxDepth + 1):
-            d = self.arr[pow(2, i) - 1:pow(2, i + 1) - 1]
+            d = self.map[str(i)]
             width = (len(d) - 1 - d[::-1].index(1)) - d.index(1) + 1
             self.maxWidth = width if width > self.maxWidth else self.maxWidth
         return self.maxWidth
@@ -22,7 +22,9 @@ class Solution:
         if root == None:
             return
 
-        self.arr[pos] = 1
+        if str(depth) not in self.map:
+            self.map[str(depth)] = [None] * pow(2, depth)
+        self.map[str(depth)][pos - pow(2, depth) + 1] = 1
         self.maxDepth = depth if depth > self.maxDepth else self.maxDepth
 
         self.toArray(root.left, depth + 1, pos * 2 + 1)
