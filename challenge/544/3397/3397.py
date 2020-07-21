@@ -5,7 +5,7 @@ class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         for i in range(len(board)):
             for j in range(len(board[i])):
-                if self.__exist(copy.deepcopy(board), word, i, j) == True:
+                if self.__exist(board, word, i, j) == True:
                     return True
 
         return False
@@ -16,15 +16,16 @@ class Solution:
                 return True
 
             top = left = bottom = right = False
-            board[i][j] = ''
+            b = copy.deepcopy(board)
+            b[i][j] = ''
             if i > 0:
-                top = self.__exist(copy.deepcopy(board), word[1:], i - 1, j)
+                top = self.__exist(b, word[1:], i - 1, j)
             if j > 0:
-                left = self.__exist(copy.deepcopy(board), word[1:], i, j - 1)
+                left = self.__exist(b, word[1:], i, j - 1)
             if i < len(board) - 1:
-                bottom = self.__exist(copy.deepcopy(board), word[1:], i + 1, j)
+                bottom = self.__exist(b, word[1:], i + 1, j)
             if j < len(board[0]) - 1:
-                right = self.__exist(copy.deepcopy(board), word[1:], i, j + 1)
+                right = self.__exist(b, word[1:], i, j + 1)
             return top or left or bottom or right
 
         return False
