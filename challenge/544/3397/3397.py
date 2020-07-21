@@ -1,5 +1,6 @@
 from typing import List
 import copy
+import _pickle
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
@@ -15,7 +16,8 @@ class Solution:
             if len(word) == 1:
                 return True
 
-            b = copy.deepcopy(board)
+            # b = copy.deepcopy(board)
+            b = _pickle.loads(_pickle.dumps(board))
             b[i][j] = ''
             return ((i > 0 and self.__exist(b, word[1:], i - 1, j) == True)
                 or (j > 0 and self.__exist(b, word[1:], i, j - 1) == True)
