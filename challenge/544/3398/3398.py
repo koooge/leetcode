@@ -19,6 +19,7 @@ class Solution:
         while q:
             count = len(q)
             temp = []
+
             while count > 0:
                 node = q.pop(0)
                 temp.append(node.val)
