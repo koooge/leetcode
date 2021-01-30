@@ -1,7 +1,6 @@
 class Solution:
     def numberOfMatches(self, n: int) -> int:
         if n == 1: return 0
-        elif n == 2: return 1
 
         m = n // 2
         if n % 2 != 0:
