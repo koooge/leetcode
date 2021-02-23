@@ -1,10 +1,8 @@
-from math import sqrt
-
 class Solution:
     def checkPerfectNumber(self, num: int) -> bool:
         if num <= 1: return False
 
-        sq = int(sqrt(num))
+        sq = int(num ** 0.5)
         res = 1
         for n in range(2, sq + 1):
             if not num % n:
