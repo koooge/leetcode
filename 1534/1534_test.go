@@ -1,7 +1,6 @@
 package main
 
 import (
-	"math"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -13,10 +12,10 @@ func countGoodTriplets(arr []int, a int, b int, c int) int {
 	for i := 0; i < len(arr)-2; i++ {
 		for j := i + 1; j < len(arr)-1; j++ {
 			for k := j + 1; k < len(arr); k++ {
-				xa := int(math.Abs(float64(arr[i] - arr[j])))
-				xb := int(math.Abs(float64(arr[j] - arr[k])))
-				xc := int(math.Abs(float64(arr[i] - arr[k])))
-				if xa <= a && xb <= b && xc <= c {
+				da := arr[i] - arr[j]
+				db := arr[j] - arr[k]
+				dc := arr[i] - arr[k]
+				if da <= a && da >= -a && db <= b && db >= -b && dc <= c && dc >= -c {
 					count++
 				}
 			}
