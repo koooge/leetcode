@@ -1,65 +1,38 @@
 package main
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func allCellsDistOrder(R int, C int, r0 int, c0 int) [][]int {
-	cells := [][]int{{r0, c0}}
-
-	if c0-1 >= 0 {
-		left := _allCellsDistOrder(0, R, 0, c0, r0, c0-1)
-		cells = append(cells, left...)
+	res := make([][]int, 0, R*C)
+	for i := 0; i < R; i++ {
+		for j := 0; j < C; j++ {
+			res = append(res, []int{i, j})
+		}
 	}
 
-	if r0+1 <= R-1 {
-		bottom := _allCellsDistOrder(r0, R, 0, C, r0+1, c0)
-		cells = append(cells, bottom...)
-	}
+	sort.Slice(res, func(i, j int) bool {
+		dist1 := abs(res[i][0]-r0) + abs(res[i][1]-c0)
+		dist2 := abs(res[j][0]-r0) + abs(res[j][1]-c0)
+		return dist1 < dist2
+	})
 
-	if c0+1 <= C-1 {
-		right := _allCellsDistOrder(0, R, c0, C, r0, c0+1)
-		cells = append(cells, right...)
-	}
-
-	if r0-1 >= 0 {
-		top := _allCellsDistOrder(0, r0, 0, C, r0-1, c0)
-		cells = append(cells, top...)
-	}
-
-	return cells
+	return res
 }
 
-func _allCellsDistOrder(Rorigin int, R int, Corigin int, C int, r0 int, c0 int) [][]int {
-	cells := [][]int{{r0, c0}}
-
-	if c0-1 > Corigin {
-		left := _allCellsDistOrder(0, R, 0, c0, r0, c0-1)
-		cells = append(cells, left...)
+func abs(x int) int {
+	if x < 0 {
+		return -x
 	}
-
-	if r0+1 <= R-1 {
-		bottom := _allCellsDistOrder(r0, R, 0, C, r0+1, c0)
-		cells = append(cells, bottom...)
-	}
-
-	if c0+1 <= C-1 {
-		right := _allCellsDistOrder(0, R, c0, C, r0, c0+1)
-		cells = append(cells, right...)
-	}
-
-	if r0-1 > Rorigin {
-		top := _allCellsDistOrder(0, r0, 0, C, r0-1, c0)
-		cells = append(cells, top...)
-	}
-
-	return cells
+	return x
 }
 
 func TestMain(t *testing.T) {
 	assert.Equal(t, [][]int{{0, 0}, {0, 1}}, allCellsDistOrder(1, 2, 0, 0))
-	// assert.Equal(t, [][]int{{0, 1}, {0, 0}, {1, 1}, {1, 0}}, allCellsDistOrder(2, 2, 0, 1))
-	// assert.Equal(t, [][]int{{1, 2}, {0, 2}, {1, 1}, {0, 1}, {1, 0}, {0, 0}}, allCellsDistOrder(2, 3, 1, 2))
+	assert.Equal(t, [][]int{{0, 1}, {0, 0}, {1, 1}, {1, 0}}, allCellsDistOrder(2, 2, 0, 1))
+	assert.Equal(t, [][]int{{1, 2}, {0, 2}, {1, 1}, {0, 1}, {1, 0}, {0, 0}}, allCellsDistOrder(2, 3, 1, 2))
 }
