@@ -7,18 +7,17 @@ import (
 )
 
 func minStartValue(nums []int) int {
-	for i := 1; ; i++ {
-		sum := i
-		for j := 0; j < len(nums); j++ {
-			sum += nums[j]
-			if sum < 1 {
-				break
-			}
-			if j == len(nums)-1 {
-				return i
-			}
+	sum := 0
+	min_sum := 0
+
+	for _, n := range nums {
+		sum += n
+		if sum < min_sum {
+			min_sum = sum
 		}
 	}
+
+	return 1 - min_sum
 }
 
 func TestMain(t *testing.T) {
