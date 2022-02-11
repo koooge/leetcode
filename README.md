@@ -11,7 +11,7 @@ https://leetcode.com
 create
 
 ```sh
-$ cargo new --lib --vcs git rust_2
+$ cargo new --lib rust_2
 ```
 
 test
