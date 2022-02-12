@@ -22,7 +22,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 
 impl Solution {
-  pub fn preorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+  pub fn postorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
     let mut res = Vec::new();
     Solution::helper(root, &mut res);
     res
@@ -47,19 +47,19 @@ mod tests {
     head.as_ref().unwrap().borrow_mut().right = Some(Rc::new(RefCell::new(TreeNode::new(2))));
     head.as_ref().unwrap().borrow_mut().right.as_ref().unwrap().borrow_mut().left = Some(Rc::new(RefCell::new(TreeNode::new(3))));
 
-    assert_eq!(Solution::preorder_traversal(head), vec![3, 2, 1]);
+    assert_eq!(Solution::postorder_traversal(head), vec![3, 2, 1]);
   }
 
 
   #[test]
   fn case2() {
-    assert_eq!(Solution::preorder_traversal(None), vec![]);
+    assert_eq!(Solution::postorder_traversal(None), vec![]);
   }
 
   #[test]
   fn case3() {
     let head = Some(Rc::new(RefCell::new(TreeNode::new(1))));
 
-    assert_eq!(Solution::preorder_traversal(head), vec![1]);
+    assert_eq!(Solution::postorder_traversal(head), vec![1]);
   }
 }
