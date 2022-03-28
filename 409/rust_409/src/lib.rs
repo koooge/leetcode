@@ -10,11 +10,10 @@ impl Solution {
     let mut ret = 0;
     for n in dict.iter() {
       ret += n;
-      if n % 2 != 0 {
+    }
+    if n % 2 != 0 {
+       if ret % 2 != 0 {
         ret -= 1;
-        if ret % 2 == 0 {
-          ret += 1;
-        }
       }
     }
     ret
