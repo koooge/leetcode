@@ -2,19 +2,15 @@ pub struct Solution {}
 
 impl Solution {
   pub fn count_binary_substrings(s: String) -> i32 {
-    s.as_bytes()
-    .windows(2)
-    .fold(vec![1], |mut v, w| {
-        if w[0] == w[1] {
-            *v.last_mut().unwrap() += 1;
-        } else {
-            v.push(1);
-        }
-        v
-    })
-    .windows(2)
-    .map(|w| w[0].min(w[1]))
-    .sum()
+    let s = s.into_bytes();
+    let (mut res, mut i, mut prev_len) = (0, 0, 0);
+    while i < s.len() {
+        let j = (i + 1..s.len()).find(|&j| s[i] != s[j]).unwrap_or(s.len());
+        res += prev_len.min(j - i);
+        prev_len = j - i;
+        i = j;
+    }
+    res as _
   }
 }
 
