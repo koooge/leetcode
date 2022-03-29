@@ -22,29 +22,29 @@ struct Solution {}
 use std::rc::Rc;
 use std::cell::RefCell;
 impl Solution {
-    pub fn tree2str(root: Option<Rc<RefCell<TreeNode>>>) -> String {
-      fn traverse(node: Option<Rc<RefCell<TreeNode>>>, s: &mut String) {
-        if let Some(node) = node {
-          let node = node.borrow();
-          *s += node.val.to_string().as_str();
-          if node.left.is_some() || node.right.is_some() {
-            *s += "(";
-            traverse(node.left.clone(), s);
-            *s += ")";
+  pub fn tree2str(root: Option<Rc<RefCell<TreeNode>>>) -> String {
+    fn traverse(node: Option<Rc<RefCell<TreeNode>>>, s: &mut String) {
+      if let Some(node) = node {
+        let node = node.borrow();
+        *s += node.val.to_string().as_str();
+        if node.left.is_some() || node.right.is_some() {
+          *s += "(";
+          traverse(node.left.clone(), s);
+          *s += ")";
 
-            if node.right.is_some() {
-              *s += "(";
-              traverse(node.right.clone(), s);
-              *s += ")";
-            }
+          if node.right.is_some() {
+            *s += "(";
+            traverse(node.right.clone(), s);
+            *s += ")";
           }
         }
       }
-
-      let mut s = String::new();
-      traverse(root, &mut s);
-      s
     }
+
+    let mut s = String::new();
+    traverse(root, &mut s);
+    s
+  }
 }
 
 #[cfg(test)]
