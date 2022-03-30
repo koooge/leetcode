@@ -12,7 +12,7 @@ impl Solution {
             .iter()
             .fold(Vec::new(), |mut acc, (&s, &f)| {
                 if f == 1 {
-                    acc.push(s.to_owned())
+                    acc.push(s.to_string())
                 }
                 acc
             })
