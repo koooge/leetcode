@@ -2,7 +2,7 @@
 https://leetcode.com
 
 - :+1: = good problem
-- :turtle: = roome for improvement
+- :turtle: = improvable solution
 - :thinking: = difficult problem
 
 ## env
